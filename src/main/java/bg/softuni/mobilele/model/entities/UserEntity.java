@@ -1,15 +1,14 @@
 package bg.softuni.mobilele.model.entities;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class UserEntity extends BaseEntity {
 
+  @Column(unique = true, nullable = false)
   private String username;
   private String password;
   private String firstName;
@@ -17,7 +16,7 @@ public class UserEntity extends BaseEntity {
   private boolean isActive;
   private String imageUrl;
   @ManyToMany(fetch = FetchType.EAGER)
-  private List<UserRoleEntity> userRoles;
+  private Set<UserRoleEntity> userRoles;
 
   public String getUsername() {
     return username;
@@ -72,12 +71,12 @@ public class UserEntity extends BaseEntity {
     return this;
   }
 
-  public List<UserRoleEntity> getUserRoles() {
+  public Set<UserRoleEntity> getUserRoles() {
     return userRoles;
   }
 
   public UserEntity setUserRoles(
-      List<UserRoleEntity> userRoles) {
+          Set<UserRoleEntity> userRoles) {
     this.userRoles = userRoles;
     return this;
   }

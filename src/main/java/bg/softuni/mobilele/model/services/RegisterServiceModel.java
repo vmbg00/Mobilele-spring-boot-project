@@ -3,25 +3,48 @@ package bg.softuni.mobilele.model.services;
 import bg.softuni.mobilele.model.entities.UserRoleEntity;
 import bg.softuni.mobilele.model.entities.enums.UserRoleEnum;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class RegisterServiceModel {
+    @NotNull
+    @NotEmpty
+    @Size(min = 3)
     private String firstName;
+
+    @NotNull
+    @NotEmpty
+    @Size(min = 3)
     private String lastName;
+
+    @NotNull
+    @NotEmpty
+    @Size(min = 2)
     private String username;
+
+    @NotNull
+    @NotEmpty
+    @Size(min = 3)
     private String password;
-    private List<UserRoleEnum> roles;
+
+//    @NotNull
+//    @NotEmpty
+//    private UserRoleEnum role;
+
 
     public RegisterServiceModel() {
     }
 
-    public List<UserRoleEnum> getRoles() {
-        return roles;
-    }
+//    public UserRoleEnum getRoles() {
+//        return role;
+//    }
+//
+//    public void setRoles(UserRoleEnum role) {
+//        this.role = role;
+//    }
 
-    public void setRoles(List<UserRoleEnum> roles) {
-        this.roles = roles;
-    }
 
     public String getFirstName() {
         return firstName;

@@ -10,6 +10,7 @@ import bg.softuni.mobilele.repository.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -57,37 +58,37 @@ public class DBInit implements CommandLineRunner {
     createFiestaOffer(fiestaModel);
 
 
-    initUsers();
+//    initUsers();
 
   }
 
-  private void initUsers() {
-
-    UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
-    UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
-
-    userRoleRepository.saveAll(List.of(adminRole, userRole));
-
-    UserEntity admin = new UserEntity();
-    admin
-            .setFirstName("Ivan")
-            .setLastName("Petrov")
-            .setUsername("admin")
-            .setUserRoles(List.of(adminRole, userRole))
-            .setPassword(passwordEncoder.encode("secret"));
-    setCurrentTimestamps(admin);
-
-    UserEntity user = new UserEntity();
-    user
-            .setFirstName("Stefan")
-            .setLastName("Ivanov")
-            .setUsername("user")
-            .setUserRoles(List.of(userRole))
-            .setPassword(passwordEncoder.encode("secret"));
-    setCurrentTimestamps(user);
-
-    userRepository.saveAll(List.of(admin, user));
-  }
+//  private void initUsers() {
+//
+//    UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
+//    UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
+//
+//    userRoleRepository.saveAll(List.of(adminRole, userRole));
+//
+//    UserEntity admin = new UserEntity();
+//    admin
+//            .setFirstName("Ivan")
+//            .setLastName("Petrov")
+//            .setUsername("admin")
+//            .setUserRoles(Set.of(adminRole, userRole))
+//            .setPassword(passwordEncoder.encode("secret"));
+//    setCurrentTimestamps(admin);
+//
+//    UserEntity user = new UserEntity();
+//    user
+//            .setFirstName("Stefan")
+//            .setLastName("Ivanov")
+//            .setUsername("user")
+//            .setUserRoles(Set.of(userRole))
+//            .setPassword(passwordEncoder.encode("secret"));
+//    setCurrentTimestamps(user);
+//
+//    userRepository.saveAll(List.of(admin, user));
+//  }
 
   private void createFiestaOffer(ModelEntity modelEntity) {
     OfferEntity fiestaOffer = new OfferEntity();
@@ -153,7 +154,7 @@ public class DBInit implements CommandLineRunner {
     return modelRepository.save(fiesta);
   }
 
-  private static void setCurrentTimestamps(BaseEntity baseEntity) {
+  public static void setCurrentTimestamps(BaseEntity baseEntity) {
     baseEntity.
         setCreated(Instant.now()).
         setUpdated(Instant.now());
