@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
                 .setFirstName(registerServiceModel.getFirstName())
                 .setLastName(registerServiceModel.getLastName())
                 .setUsername(registerServiceModel.getUsername())
-                .setUserRoles(Set.of(adminRole, userRole))
+                .setUserRoles(List.of(userRole, adminRole))
                 .setPassword(passwordEncoder.encode(registerServiceModel.getPassword()));
         setCurrentTimestamps(user);
 

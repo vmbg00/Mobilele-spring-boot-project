@@ -57,3 +57,11 @@ form.main-form {
 .logged-user {
      color: white;
 }
+
+.logoutLblPos{
+     background: gray;
+}
+
+.form-group{
+     color: white;
+}

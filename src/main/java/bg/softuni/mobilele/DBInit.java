@@ -58,6 +58,11 @@ public class DBInit implements CommandLineRunner {
     createFiestaOffer(fiestaModel);
 
 
+    UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
+    UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
+
+    userRoleRepository.saveAll(List.of(adminRole, userRole));
+
 //    initUsers();
 
   }

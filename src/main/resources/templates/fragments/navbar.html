@@ -38,8 +38,10 @@
                           th:action="@{/users/logout}">
                         <div class="form-inline my-2 my-lg-0 border px-3">
                             <div class="logged-user"
-                                 th:text="${@currentUser.name}"></div>
-                            <input type="submit" class="btn nav-link" value="Logout"></input>
+                                 th:text="|Welcome, ${@currentUser.name}|"></div>
+                            <label class="logoutLblPos">
+                                <input name="submit2" type="submit" id="submit2" value="Logout">
+                            </label>
                         </div>
                     </form>
 

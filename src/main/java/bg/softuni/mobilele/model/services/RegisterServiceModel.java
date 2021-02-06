@@ -31,17 +31,17 @@ public class RegisterServiceModel {
 
 //    @NotNull
 //    @NotEmpty
-//    private UserRoleEnum role;
+//    private List<UserRoleEnum> role;
 
 
     public RegisterServiceModel() {
     }
 
-//    public UserRoleEnum getRoles() {
+//    public List<UserRoleEnum> getRoles() {
 //        return role;
 //    }
 //
-//    public void setRoles(UserRoleEnum role) {
+//    public void setRoles(List<UserRoleEnum> role) {
 //        this.role = role;
 //    }
 

@@ -16,7 +16,7 @@ public class UserEntity extends BaseEntity {
   private boolean isActive;
   private String imageUrl;
   @ManyToMany(fetch = FetchType.EAGER)
-  private Set<UserRoleEntity> userRoles;
+  private List<UserRoleEntity> userRoles;
 
   public String getUsername() {
     return username;
@@ -71,12 +71,12 @@ public class UserEntity extends BaseEntity {
     return this;
   }
 
-  public Set<UserRoleEntity> getUserRoles() {
+  public List<UserRoleEntity> getUserRoles() {
     return userRoles;
   }
 
   public UserEntity setUserRoles(
-          Set<UserRoleEntity> userRoles) {
+          List<UserRoleEntity> userRoles) {
     this.userRoles = userRoles;
     return this;
   }
