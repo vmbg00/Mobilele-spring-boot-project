@@ -11,6 +11,8 @@ import bg.softuni.mobilele.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -71,16 +73,15 @@ public class UserServiceImpl implements UserService {
     public void registerUser(RegisterServiceModel registerServiceModel) {
         UserEntity user = new UserEntity();
 
-        UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
-        UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
+        UserRoleEnum chosenRole = UserRoleEnum.valueOf(registerServiceModel.getRoles());
 
-        userRoleRepository.saveAll(List.of(adminRole, userRole));
+        UserRoleEntity role = this.userRoleRepository.findByRole(chosenRole).orElse(null);
 
         user
                 .setFirstName(registerServiceModel.getFirstName())
                 .setLastName(registerServiceModel.getLastName())
                 .setUsername(registerServiceModel.getUsername())
-                .setUserRoles(List.of(userRole, adminRole))
+                .setUserRoles(List.of(role))
                 .setPassword(passwordEncoder.encode(registerServiceModel.getPassword()));
         setCurrentTimestamps(user);
 

@@ -9,5 +9,5 @@ public interface UserService {
 
     void logoutCurrentUser();
 
-    void registerUser(RegisterServiceModel RegisterServiceModel);
+    void registerUser(RegisterServiceModel registerServiceModel);
 }

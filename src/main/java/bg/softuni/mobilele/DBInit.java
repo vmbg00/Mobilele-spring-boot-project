@@ -41,27 +41,32 @@ public class DBInit implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    BrandEntity fordBrand = new BrandEntity();
-    fordBrand.setName("Ford");
-    setCurrentTimestamps(fordBrand);
+    if (brandRepository.count() == 0){
+      BrandEntity fordBrand = new BrandEntity();
+      fordBrand.setName("Ford");
+      setCurrentTimestamps(fordBrand);
 
-    BrandEntity hondaBrand = new BrandEntity();
-    hondaBrand.setName("Honda");
-    setCurrentTimestamps(hondaBrand);
+      BrandEntity hondaBrand = new BrandEntity();
+      hondaBrand.setName("Honda");
+      setCurrentTimestamps(hondaBrand);
 
-    brandRepository.saveAndFlush(fordBrand);
-    brandRepository.saveAndFlush(hondaBrand);
+      brandRepository.saveAndFlush(fordBrand);
+      brandRepository.saveAndFlush(hondaBrand);
 
-    ModelEntity fiestaModel = initFiesta(fordBrand);
-    initEscort(fordBrand);
-    initNC750S(hondaBrand);
-    createFiestaOffer(fiestaModel);
+      if (modelRepository.count() == 0){
+        ModelEntity fiestaModel = initFiesta(fordBrand);
+        initEscort(fordBrand);
+        initNC750S(hondaBrand);
+        createFiestaOffer(fiestaModel);
+      }
+    }
 
+    if (userRoleRepository.count() == 0){
+      UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
+      UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
 
-    UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
-    UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
-
-    userRoleRepository.saveAll(List.of(adminRole, userRole));
+      userRoleRepository.saveAll(List.of(adminRole, userRole));
+    }
 
 //    initUsers();
 

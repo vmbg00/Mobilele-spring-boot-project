@@ -29,21 +29,20 @@ public class RegisterServiceModel {
     @Size(min = 3)
     private String password;
 
-//    @NotNull
-//    @NotEmpty
-//    private List<UserRoleEnum> role;
+    @NotEmpty
+    private String role;
 
 
     public RegisterServiceModel() {
     }
 
-//    public List<UserRoleEnum> getRoles() {
-//        return role;
-//    }
-//
-//    public void setRoles(List<UserRoleEnum> role) {
-//        this.role = role;
-//    }
+    public String getRoles() {
+        return role;
+    }
+
+    public void setRoles(String role) {
+        this.role = role;
+    }
 
 
     public String getFirstName() {

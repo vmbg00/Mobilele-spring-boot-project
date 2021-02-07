@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping()
 public class RegisterController {
 
     private final UserService userService;
@@ -28,7 +28,7 @@ public class RegisterController {
         return new RegisterServiceModel();
     }
 
-    @GetMapping("/register")
+    @GetMapping("/users/register")
     public String getRegister(Model model){
         if (!model.containsAttribute("registerServiceModel")){
             model.addAttribute("registerServiceModel", new RegisterServiceModel());
@@ -36,7 +36,7 @@ public class RegisterController {
         return "auth-register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/users/register")
     public String postRegister(@Valid @ModelAttribute RegisterServiceModel registerServiceModel,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes){
@@ -45,14 +45,11 @@ public class RegisterController {
             redirectAttributes.addFlashAttribute("registerServiceModel", registerServiceModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerServiceModel", bindingResult);
 
-            return "redirect:register";
+            return "redirect:/users/register";
         }
-
-        // TODO fix role selection
 
         userService.registerUser(registerServiceModel);
 
         return "redirect:login";
     }
-
 }
