@@ -1,27 +1,49 @@
 package bg.softuni.mobilele.model.view;
 
-import bg.softuni.mobilele.model.entities.ModelEntity;
-import bg.softuni.mobilele.model.entities.enums.EngineEnum;
-import bg.softuni.mobilele.model.entities.enums.TransmissionEnum;
-import java.math.BigDecimal;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-
 public class OfferSummaryViewModel {
 
-  private EngineEnum engine;
+  private int id;
+  private String model;
+  private String brand;
+  private String engine;
   private String imageUrl;
   private int mileage;
-  private BigDecimal price;
+  private int price;
+  private String transmission;
   private int year;
-  private TransmissionEnum transmission;
 
-  public EngineEnum getEngine() {
+  public int getId() {
+    return id;
+  }
+
+  public OfferSummaryViewModel setId(int id) {
+    this.id = id;
+    return this;
+  }
+
+  public String getModel() {
+    return model;
+  }
+
+  public OfferSummaryViewModel setModel(String model) {
+    this.model = model;
+    return this;
+  }
+
+  public String getBrand() {
+    return brand;
+  }
+
+  public OfferSummaryViewModel setBrand(String brand) {
+    this.brand = brand;
+    return this;
+  }
+
+  public String getEngine() {
     return engine;
   }
 
-  public OfferSummaryViewModel setEngine(EngineEnum engine) {
+  public OfferSummaryViewModel setEngine(String engine) {
     this.engine = engine;
     return this;
   }
@@ -44,12 +66,21 @@ public class OfferSummaryViewModel {
     return this;
   }
 
-  public BigDecimal getPrice() {
+  public int getPrice() {
     return price;
   }
 
-  public OfferSummaryViewModel setPrice(BigDecimal price) {
+  public OfferSummaryViewModel setPrice(int price) {
     this.price = price;
+    return this;
+  }
+
+  public String getTransmission() {
+    return transmission;
+  }
+
+  public OfferSummaryViewModel setTransmission(String transmission) {
+    this.transmission = transmission;
     return this;
   }
 
@@ -59,16 +90,6 @@ public class OfferSummaryViewModel {
 
   public OfferSummaryViewModel setYear(int year) {
     this.year = year;
-    return this;
-  }
-
-  public TransmissionEnum getTransmission() {
-    return transmission;
-  }
-
-  public OfferSummaryViewModel setTransmission(
-      TransmissionEnum transmission) {
-    this.transmission = transmission;
     return this;
   }
 }

@@ -62,6 +62,6 @@ form.main-form {
      background: gray;
 }
 
-.form-group{
-     color: white;
+.form-inline my-2 my-lg-0 border px-3{
+     color: black;
 }

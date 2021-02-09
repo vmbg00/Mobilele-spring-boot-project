@@ -2,17 +2,32 @@ package bg.softuni.mobilele.model.services;
 
 import bg.softuni.mobilele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilele.model.entities.enums.TransmissionEnum;
+import bg.softuni.mobilele.model.validators.PresentOrPast;
 
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class OfferServiceModel {
+
+    @NotNull
     private EngineEnum engine;
+    @NotNull
     private TransmissionEnum transmission;
+    @PresentOrPast(minYear = 1930)
     private Integer year;
+    @NotNull
     private Long modelId;
+    @NotNull
+    @DecimalMin(value = "1")
+    @DecimalMax(value = "1000000")
     private BigDecimal price;
+    @NotNull
+    @Positive
     private Integer mileage;
+    @NotBlank
+    @Size(min = 10)
     private String description;
+    @NotBlank
     private String imageUrl;
 
     public Integer getMileage() {

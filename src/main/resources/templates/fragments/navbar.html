@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
 <body>
+
 <div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <a class="navbar-brand" href="/"><img alt="car picture" src="/img/car.png" class="logo"></a>
@@ -33,30 +36,27 @@
                         <a class="dropdown-item" href="/">Something else here</a>
                     </div>
                 </li>
-                <li class="nav-item" th:if="${@currentUser.isLoggedIn()}">
+                <li th:if="${@currentUser.isLoggedIn}" class="nav-item">
                     <form method="POST"
                           th:action="@{/users/logout}">
                         <div class="form-inline my-2 my-lg-0 border px-3">
-                            <div class="logged-user"
-                                 th:text="|Welcome, ${@currentUser.name}|"></div>
-                            <label class="logoutLblPos">
-                                <input name="submit2" type="submit" id="submit2" value="Logout">
-                            </label>
+                            <input type="submit" class="nav-link" th:value="'Logout ' + ${@currentUser.name}"/>
                         </div>
                     </form>
-
                 </li>
 
-                <li class="nav-item" th:if="${@currentUser.isAnonymous()}">
+                <li th:if="${@currentUser.anonymous}" class="nav-item">
                     <a class="nav-link" href="/users/register">Register</a>
                 </li>
-                <li class="nav-item" th:if="${@currentUser.isAnonymous()}">
+                <li th:if="${@currentUser.anonymous}" class="nav-item">
                     <a class="nav-link" href="/users/login">Login</a>
                 </li>
 
             </ul>
         </div>
     </nav>
+
 </div>
+
 </body>
 </html>
