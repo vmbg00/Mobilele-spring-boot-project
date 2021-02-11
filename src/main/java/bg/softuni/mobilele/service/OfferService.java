@@ -15,4 +15,6 @@ public interface OfferService {
   Optional<OfferDetailsViewModel> getOfferDetails(long offerId);
 
   void removeOffer(long offerId);
+
+  void updateOffer(OfferServiceModel offerModel, int id);
 }

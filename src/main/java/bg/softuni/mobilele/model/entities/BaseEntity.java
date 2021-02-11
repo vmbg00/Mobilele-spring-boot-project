@@ -1,11 +1,7 @@
 package bg.softuni.mobilele.model.entities;
 
 import java.time.Instant;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public class BaseEntity {
@@ -45,6 +41,17 @@ public class BaseEntity {
   public BaseEntity setUpdated(Instant updated) {
     this.updated = updated;
     return this;
+  }
+
+  @PrePersist
+  public void prePersist() {
+    setCreated(Instant.now());
+    setUpdated(Instant.now());
+  }
+
+  @PreUpdate
+  public void preUpdate() {
+    setUpdated(Instant.now());
   }
 
   @Override

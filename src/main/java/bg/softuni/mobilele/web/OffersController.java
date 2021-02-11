@@ -1,6 +1,7 @@
 package bg.softuni.mobilele.web;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import bg.softuni.mobilele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilele.model.entities.enums.TransmissionEnum;
@@ -11,12 +12,7 @@ import bg.softuni.mobilele.service.OfferService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -75,6 +71,42 @@ public class OffersController {
 
     offerService.createOffer(offerModel);
     return "redirect:/offers/all";
+  }
+
+  @GetMapping("/update/{id}")
+  public String updateOffer(Model model, @PathVariable int id){
+    model.addAttribute("engines", EngineEnum.values());
+    model.addAttribute("transmissions", TransmissionEnum.values());
+    model.addAttribute("brands", brandService.getAllBrands());
+
+    OfferDetailsViewModel offerDetailsModel = offerService.
+            getOfferDetails(id).
+            orElseThrow();
+
+    model.addAttribute("offer", offerDetailsModel);
+
+    return "update";
+  }
+
+  @RequestMapping("/update/{id}")
+  @ResponseBody
+  public String updateOfferConfirm(@Valid OfferServiceModel offerModel,
+                                   @PathVariable("id") int userId,
+                                   BindingResult bindingResult,
+                                   RedirectAttributes redirectAttributes){
+
+    if (bindingResult.hasErrors()){
+      redirectAttributes.addFlashAttribute("offerModel", offerModel);
+      redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerModel", bindingResult);
+
+      return "redirect:/offers/update";
+    }
+
+    this.offerService.updateOffer(offerModel, userId);
+
+    //TODO - fix redirecting
+
+    return "offers.html";
   }
 
 

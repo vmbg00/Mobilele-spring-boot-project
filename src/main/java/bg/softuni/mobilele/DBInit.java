@@ -57,7 +57,7 @@ public class DBInit implements CommandLineRunner {
         ModelEntity fiestaModel = initFiesta(fordBrand);
         initEscort(fordBrand);
         initNC750S(hondaBrand);
-        createFiestaOffer(fiestaModel);
+        //createFiestaOffer(fiestaModel);
       }
     }
 

@@ -44,9 +44,9 @@
                 </li>
             </ul>
             <div class="card-body" th:if="*{isEditable()}">
-                <a class="card-link" href="/">Update</a>
+                <a class="card-link" th:href="@{/offers/update/{id}(id=*{id})}">Update</a>
                 <form th:action="@{/offers/delete/{id}/(id=*{id})}"
-                      th:method="delete">
+                      th:method="DELETE">
                     <input class="card-link"
                            type="submit"
                            value="Delete"/>

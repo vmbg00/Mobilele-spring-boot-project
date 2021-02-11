@@ -93,6 +93,31 @@ public class OfferServiceImpl implements OfferService {
     offerRepository.deleteById(offerId);
   }
 
+  @Override
+  public void updateOffer(OfferServiceModel offerModel, int id) {
+    ModelMapper modelMapper = new ModelMapper();
+    OfferEntity offer = this.offerRepository.findById((long) id
+    ).orElse(null);
+
+    ModelEntity model = modelRepository.findById(offerModel.getModelId()).
+            orElse(null);
+
+    offer
+            .setModel(model)
+            .setDescription(offerModel.getDescription())
+            .setEngine(offerModel.getEngine())
+            .setImageUrl(offerModel.getImageUrl())
+            .setMileage(offerModel.getMileage())
+            .setPrice(offerModel.getPrice())
+            .setTransmission(offerModel.getTransmission())
+            .setYear(offerModel.getYear());
+
+    offer.preUpdate();
+
+    offerRepository.save(offer);
+
+  }
+
   private static OfferSummaryViewModel mapToSummary(OfferEntity offerEntity) {
     OfferSummaryViewModel offerModel = new OfferSummaryViewModel();
     mapToSummary(offerEntity, offerModel);
