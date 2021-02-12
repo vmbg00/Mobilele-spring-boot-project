@@ -95,7 +95,6 @@ public class OfferServiceImpl implements OfferService {
 
   @Override
   public void updateOffer(OfferServiceModel offerModel, int id) {
-    ModelMapper modelMapper = new ModelMapper();
     OfferEntity offer = this.offerRepository.findById((long) id
     ).orElse(null);
 
@@ -112,7 +111,7 @@ public class OfferServiceImpl implements OfferService {
             .setTransmission(offerModel.getTransmission())
             .setYear(offerModel.getYear());
 
-    offer.preUpdate();
+    offer.setUpdated(Instant.now());
 
     offerRepository.save(offer);
 

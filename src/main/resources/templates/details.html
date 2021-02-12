@@ -36,7 +36,7 @@
                     <div class="card-text">• Engine: <span th:text="*{engine}">Engine type</span></div>
                     <div class="card-text">• Transmission: <span th:text="*{transmission}">Transmission type</span></div>
                     <div class="card-text">• Created: <span th:text="*{#temporals.format(offerCreated, 'dd-MM-yyyy HH:mm')}">Created</span></div>
-                    <div class="card-text">• Last updated: <span th:text="*{#temporals.format(offerCreated, 'dd-MM-yyyy HH:mm')}">Updated</span></div>
+                    <div class="card-text">• Last updated: <span th:text="${#dates.format(#dates.createNow(), 'dd-MM-yyyy HH:mm')}">Updated</span></div>
                     <div class="card-text">• Seller:
                         <span th:text="*{sellerFirstName}">First name</span>
                         <span th:text="*{sellerLastName}">Last name</span>
