@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/offers")
@@ -88,10 +90,9 @@ public class OffersController {
     return "update";
   }
 
-  @RequestMapping("/update/{id}")
-  @ResponseBody
-  public String updateOfferConfirm(@Valid OfferServiceModel offerModel,
-                                   @PathVariable("id") int userId,
+  @PostMapping("/update/{id}")
+  public String updateOfferConfirm(@Valid @ModelAttribute OfferServiceModel offerModel,
+                                   @PathVariable int id,
                                    BindingResult bindingResult,
                                    RedirectAttributes redirectAttributes){
 
@@ -99,14 +100,12 @@ public class OffersController {
       redirectAttributes.addFlashAttribute("offerModel", offerModel);
       redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerModel", bindingResult);
 
-      return "redirect:/offers/update";
+      return "redirect:/offers/all";
     }
 
-    this.offerService.updateOffer(offerModel, userId);
+    this.offerService.updateOffer(offerModel, id);
 
-    //TODO - fix redirecting
-
-    return "offers.html";
+    return "redirect:http://localhost:8080/";
   }
 
 
